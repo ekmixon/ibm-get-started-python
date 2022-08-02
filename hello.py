@@ -52,9 +52,8 @@ def root():
 def get_visitor():
     if client:
         return jsonify(list(map(lambda doc: doc['name'], db)))
-    else:
-        print('No database')
-        return jsonify([])
+    print('No database')
+    return jsonify([])
 
 # /**
 #  * Endpoint to get a JSON array of all the visitors in the database
@@ -74,10 +73,10 @@ def put_visitor():
     if client:
         my_document = db.create_document(data)
         data['_id'] = my_document['_id']
-        return jsonify(data)
     else:
         print('No database')
-        return jsonify(data)
+
+    return jsonify(data)
 
 @atexit.register
 def shutdown():
